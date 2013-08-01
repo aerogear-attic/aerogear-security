@@ -31,7 +31,8 @@ public final class PKCS12Util {
 
     private static final String ALGORITHM = "PKCS12";
 
-    private PKCS12Util(){}
+    private PKCS12Util() {
+    }
 
     /**
      * Check if the file provide is PKCS12
