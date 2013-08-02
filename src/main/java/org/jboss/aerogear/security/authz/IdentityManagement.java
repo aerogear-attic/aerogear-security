@@ -42,6 +42,15 @@ public interface IdentityManagement<T> {
     GrantMethods revoke(String... roles);
 
     /**
+     * Reset user' password
+     * @param user User credential
+     * @param currentPassword current password already registered
+     * @param newPassword new password
+     * @throws Exception
+     */
+    void reset(T user, String currentPassword, String newPassword);
+
+    /**
      * Find an User by the username specified
      *
      * @param username
@@ -90,8 +99,26 @@ public interface IdentityManagement<T> {
          * @param username represents a simple user's implementation to hold credentials.
          */
         void to(String username);
+
+        /**
+         * This method revokes roles specified on {@link IdentityManagement#revoke(String...)}
+         *
+         * @param user represents a simple user's implementation to hold credentials.
+         */
         public void to(T user);
+
+        /**
+         * This method specifies which roles will be applied to User
+         *
+         * @param roles Array of roles
+         * @return builder implementation
+         */
         GrantMethods<T> roles(String[] roles);
+
+        /**
+         * This method allows to revoke which <i>roles</i> must be revoked to User
+         * @param roles List of roles to be revoked
+         */
         GrantMethods<T> revoke(String[] roles);
     }
 
