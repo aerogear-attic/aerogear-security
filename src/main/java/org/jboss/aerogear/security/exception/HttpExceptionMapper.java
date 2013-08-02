@@ -34,7 +34,7 @@ public class HttpExceptionMapper implements ExceptionMapper<EJBException> {
 
         Exception e = exception.getCausedByException();
 
-        if (e instanceof UnauthorizedException) {
+        if (e instanceof UnauthorizedException || e instanceof AeroGearSecurityException) {
             return Response.status(AUTHENTICATION_FAILED.getCode())
                     .entity(AUTHENTICATION_FAILED.toString())
                     .build();
