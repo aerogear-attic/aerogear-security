@@ -33,6 +33,15 @@ public interface IdentityManagement<T> {
     GrantMethods grant(String... roles);
 
     /**
+     * This method allows to revoke which <i>roles</i> must be revoked to User
+     *
+     * @param roles A list of roles.
+     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified User.
+     */
+
+    GrantMethods revoke(String... roles);
+
+    /**
      * Find an User by the username specified
      *
      * @param username
@@ -81,6 +90,9 @@ public interface IdentityManagement<T> {
          * @param username represents a simple user's implementation to hold credentials.
          */
         void to(String username);
+        public void to(T user);
+        GrantMethods<T> roles(String[] roles);
+        GrantMethods<T> revoke(String[] roles);
     }
 
     String getSecret();
