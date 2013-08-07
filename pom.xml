@@ -21,7 +21,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>aerogear-security</name>
@@ -54,7 +54,7 @@
         <connection>scm:git:git@github.com:aerogear/aerogear-security.git</connection>
         <developerConnection>scm:git:git@github.com:aerogear/aerogear-security.git</developerConnection>
         <url>git@github.com:aerogear/aerogear-security.git</url>
-      <tag>HEAD</tag>
+      <tag>1.1.2</tag>
   </scm>
 
     <properties>
