@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.token.util;
+package org.jboss.aerogear.security.web.filter;
 
 import javax.servlet.FilterConfig;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.Properties;
  * Please note that the Class expects in META-INF/config.properties that contains your secret.
  *
  */
-public class Configuration {
+public class PasswordHandlerConfig {
 
 
     private static final String CONFIG_FILE = "META-INF/config.properties";
@@ -23,7 +23,7 @@ public class Configuration {
 
     static {
         props = new Properties();
-        InputStream in = Configuration.class.getClassLoader().getResourceAsStream(CONFIG_FILE);
+        InputStream in = PasswordHandlerConfig.class.getClassLoader().getResourceAsStream(CONFIG_FILE);
         try {
             props.load(in);
         } catch (IOException e) {
@@ -37,8 +37,8 @@ public class Configuration {
      * @param config
      */
     public static void loadFilterConfig(FilterConfig config) {
-        Configuration.applicationUrl = config.getInitParameter("url");
-        Configuration.redirectPage = config.getInitParameter("redirect-page");
+        PasswordHandlerConfig.applicationUrl = config.getInitParameter("url");
+        PasswordHandlerConfig.redirectPage = config.getInitParameter("redirect-page");
     }
 
     /**

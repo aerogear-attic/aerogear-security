@@ -18,7 +18,6 @@ package org.jboss.aerogear.security.web.filter;
 
 
 import org.jboss.aerogear.security.token.service.TokenService;
-import org.jboss.aerogear.security.token.util.Configuration;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -32,7 +31,7 @@ import java.io.IOException;
  * The filter does 2 checks :
  *  - Checks if the token is valid by using the tokenId from the parameters
  *  - Checks if the incoming method is a GET
- * If these 2 checks pass, then the Filter redirects the Request to the URL provided by the Configuration object.
+ * If these 2 checks pass, then the Filter redirects the Request to the URL provided by the PasswordHandlerConfig object.
  * Be sure to configure correctly your filter in the web.xml :
  * <pre>
  * {@code
@@ -66,7 +65,7 @@ public class PasswordHandler implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        Configuration.loadFilterConfig(config);
+        PasswordHandlerConfig.loadFilterConfig(config);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class PasswordHandler implements Filter {
 
     private void redirectPage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
-        httpServletRequest.getRequestDispatcher(Configuration.getRedirectPage()).forward(httpServletRequest, httpServletResponse);
+        httpServletRequest.getRequestDispatcher(PasswordHandlerConfig.getRedirectPage()).forward(httpServletRequest, httpServletResponse);
 
     }
 
