@@ -19,6 +19,8 @@ package org.jboss.aerogear.security.web.filter;
 
 import org.jboss.aerogear.security.token.service.TokenService;
 
+import javax.decorator.Delegate;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -59,9 +61,12 @@ import java.io.IOException;
 public class PasswordHandler implements Filter {
 
     public static final String TOKEN_ID_PARAM = "id";
+    private final TokenService tokenService;
 
     @Inject
-    private TokenService tokenService;
+    public PasswordHandler(final Instance<TokenService> tokenService) {
+        this.tokenService = tokenService.isUnsatisfied() ? defaultSecurityProvider() : tokenService.get();
+    }
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -95,5 +100,23 @@ public class PasswordHandler implements Filter {
     public void destroy() {
     }
 
+    private TokenService defaultSecurityProvider() {
+        return new TokenService() {
+            @Override
+            public void destroy(String id) {
+
+            }
+
+            @Override
+            public boolean isValid(String id) {
+                return false;
+            }
+
+            @Override
+            public String generate(String email) {
+                return null;
+            }
+        };
+    }
 }
 
